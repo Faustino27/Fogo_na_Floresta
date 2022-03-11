@@ -14,7 +14,7 @@ class TreeCell(Agent):
     practice to give one to each agent anyway.
     """
 
-    def __init__(self, pos, model):
+    def __init__(self, pos, model, survival_factor):
         """
         Create a new tree.
         Args:
@@ -24,6 +24,7 @@ class TreeCell(Agent):
         super().__init__(pos, model)
         self.pos = pos
         self.condition = "Fine"
+        self.survival_factor = survival_factor
 
     def step(self):
         """
@@ -33,4 +34,8 @@ class TreeCell(Agent):
             for neighbor in self.model.grid.neighbor_iter(self.pos):
                 if neighbor.condition == "Fine":
                     neighbor.condition = "On Fire"
-            self.condition = "Burned Out"
+            if self.survival_factor >= self.random.random():
+            	self.condition = "Survivor" #se a arvore passar no teste de fator de resitência ela sobrevive
+            else:
+            	self.condition = "Burned Out"
+

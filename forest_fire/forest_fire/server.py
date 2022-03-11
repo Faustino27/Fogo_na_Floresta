@@ -4,7 +4,7 @@ from mesa.visualization.UserParam import UserSettableParameter
 
 from .model import ForestFire
 
-COLORS = {"Fine": "#00AA00", "On Fire": "#880000", "Burned Out": "#000000"}
+COLORS = {"Fine": "#00AA00", "On Fire": "#880000", "Burned Out": "#000000", "Survivor": "#D3C324"}
 
 
 def forest_fire_portrayal(tree):
@@ -29,6 +29,7 @@ pie_chart = PieChartModule(
 model_params = {
     "height": 100,
     "width": 100,
+    "surival_factor": UserSettableParameter("slider", "Survival rate", 0.1, 0.01, 1, 0.01),
     "density": UserSettableParameter("slider", "Tree density", 0.65, 0.01, 1.0, 0.01),
 }
 server = ModularServer(
